@@ -1,0 +1,75 @@
+@extends('template')
+@section('contenu')
+
+
+<form method="POST" action="{{ route('interventions.store') }}" enctype="multipart/form-data" >
+
+		<!-- Le token CSRF -->
+		@csrf
+		
+		<!--
+
+usager_id
+date_intervention
+type_intervention
+resultat
+observation
+id_user
+id_interventions_categorie
+id_thematique
+id_sous_thematique
+-->
+		<p>
+			<label for="id_interventions_categorie" >categorie inter</label><br/>
+			<select name="id_interventions_categorie" id="id_interventions_categorie" >
+				@foreach ($id_interventions_categorie as $u)
+				<option value="{{ $u->nom }}" >{{ $u->nom }}</option>
+				@endforeach
+			</select>
+
+
+
+			@error("id_interventions_categorie")
+			<div>{{ $message }}</div>
+			@enderror
+		</p>
+
+		<p>
+			<label for="id_usagers" >usager</label><br/>
+			<select name="id_usagers" id="id_usagers" >
+				@foreach ($usagers as $u)
+				<option value="{{ $u->id_usagers }}" >{{ $u->id_usagers }}</option>
+				@endforeach
+			</select>
+
+			@error("id_usagers")
+			<div>{{ $message }}</div>
+			@enderror
+		</p>	
+		
+		<p>
+			<label for="date_intervention" >date intervention</label><br/>
+			<input type="date" name="date_intervention" value="{{ old('date_intervention') }}"  id="date_intervention" placeholder="date intervention" >
+			@error("date_intervention")
+			<div>{{ $message }}</div>
+			@enderror
+		</p>
+		<p>
+			<label for="type_intervention" >type intervention</label><br/>
+			<select name="type_intervention" id="type_intervention" >
+				@foreach ($type_interventions as $u)
+				<option value="{{ $u->nom }}" >{{ $u->nom }}</option>
+				@endforeach
+			</select>
+			@error("type_intervention")
+			<div>{{ $message }}</div>
+			@enderror
+		</p>
+
+
+		<input type="submit" name="valider" value="Valider" >
+
+	</form>
+
+
+@endsection
