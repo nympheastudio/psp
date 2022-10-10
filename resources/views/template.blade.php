@@ -103,22 +103,11 @@
 @yield('entete')
 </head>
 <body>
-<!--<div class="loader-container">
-<div class="spinner"></div>
-</div>-->
-{{--
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary flex-sm-nowrap flex-wrap">
 
-<div class='navbar-brand'>
-<img src="https://facevaucluse.com/images/logo.jpg" class="img-fluid" alt="Responsive image" style="width: auto; height: 50px;">
-<!-- <a class="navbar-brand" href="#">Fonds de soutien<br>à la professionnalisation d’AF&C
-</a><span class='navbar-title'>PSP Face Vaucluse</span>--></div>
---}}
 <nav class="navbar navbar-expand-lg  bg-primary">
 <div class='navbar-brand'>
-<img src="https://facevaucluse.com/images/logo.jpg" class="img-fluid" alt="Responsive image" style="width: auto; height: 50px;">
-<!-- <a class="navbar-brand" href="#">Fonds de soutien<br>à la professionnalisation d’AF&C
-</a><span class='navbar-title'>PSP Face Vaucluse</span>--></div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<img src="https://facevaucluse.com/images/logo.jpg" class="img-fluid" alt="PSP" style="width: auto; height: 50px;">
+</div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -127,10 +116,11 @@
       
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Mon compte
+        {{Auth::user()->name}} ({{Auth::user()->role}})
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">deconnexion</a>
+        <a class="dropdown-item" href="{{ route('signout') }}">Déconnexion </a>
+
           <a class="dropdown-item" href="#">parametres</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">test sous rubrique</a>
@@ -165,7 +155,7 @@ aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 
 
 <li class="nav-item">
-<a class="nav-link" href="{{ route('signout') }}">Déconnexion {{Auth::user()->name}}  </a>
+<a class="nav-link" href="{{ route('signout') }}">Déconnexion {{Auth::user()->name}} ({{Auth::user()->role}})</a>
 </li>
 
 
