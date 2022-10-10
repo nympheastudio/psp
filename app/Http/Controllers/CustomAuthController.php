@@ -51,6 +51,8 @@ class CustomAuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
         ]);
+
+        //echo $request->role.'qsdfghj';exit;
            
         $data = $request->all();
         $check = $this->create($data);
@@ -61,15 +63,16 @@ class CustomAuthController extends Controller
     public function create(array $data)
     {
       $user = User::create([
-      //  'name' => $data['name'],
-      'name' => '',
-      'prenom' => '',
+       'name' => $data['name'],
+       'role' => $data['role'], 
+         'prenom' => $data['prenom'],
         'email' => $data['email'],
-        'password' => Hash::make($data['password'])
+        'password' => Hash::make($data['password']),
+
       ]);
 
-      Auth::login($user);
-      return redirect("dashboard")->withSuccess('compte crée avec succes');
+     // Auth::login($user);
+      return redirect("dashboard")->withSuccess('compte utilisateur crée avec succes');
     }    
     
     public function documents()

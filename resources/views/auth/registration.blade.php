@@ -8,10 +8,24 @@ Vous allez créer un nouveau membre de l'équipe Face Vaucluse<br>
                         <form action="{{ route('register.custom') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
+                                <select name="role" id="role" class="form-control">
+                                    
+                                    <option value="mediateur">Médiateur</option>
+                                    <option value="admin">Administrateur</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
                                 <input type="text" placeholder="Nom" id="name" class="form-control" name="name"
                                     required autofocus>
                                 @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text" placeholder="Prénom" id="prenom" class="form-control" name="prenom"
+                                    required autofocus>
+                                @if ($errors->has('prenom'))
+                                <span class="text-danger">{{ $errors->first('prenom') }}</span>
                                 @endif
                             </div>
                             <div class="form-group mb-3">
@@ -21,6 +35,7 @@ Vous allez créer un nouveau membre de l'équipe Face Vaucluse<br>
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
+                           
                             <div class="form-group mb-3">
                                 <input type="password" placeholder="Mot de passe" id="password" class="form-control"
                                     name="password" required>
