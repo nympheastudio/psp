@@ -16,12 +16,12 @@
 </div>
 <div class="form-group">
 <label for="start">Date de début</label>
-<input type="date" class="form-control" id="start" name="event_start" placeholder="Date de début">
+<input type="datetime-local" class="form-control" id="start" name="event_start" placeholder="Date de début">
 
 </div>
 <div class="form-group">
 <label for="end">Date de fin</label>
-<input type="date" class="form-control" id="end" name="event_end" placeholder="Date de fin">
+<input type="datetime-local" class="form-control" id="end" name="event_end" placeholder="Date de fin">
 
 </div>
 
