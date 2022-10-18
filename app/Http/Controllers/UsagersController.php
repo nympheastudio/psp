@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usagers;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class UsagersController extends Controller
 {
@@ -17,6 +18,11 @@ class UsagersController extends Controller
     {
         //
         $usagers = Usagers::latest()->get();
+foreach($usagers as $u){
+    $u->age = Carbon::parse($u->dob)->diff(\Carbon\Carbon::now())->format('%y ans');
+    $u->quartier = DB::table('quartiers')->where('id', '=', $u->quartier)->first()->nom;
+}
+
         return view('usagers.usagers', compact("usagers"));
     }
 
@@ -58,6 +64,9 @@ class UsagersController extends Controller
         $usager->num_alloc = $request->num_alloc;
         $usager->categorie_sociopro = $request->categorie_sociopro;
         $usager->autre = $request->autre;
+        $usager->dob = $request->dob;
+        $usager->genre = $request->genre;
+        $usager->quartier = $request->quartier;
         $usager->save();
         return redirect()->route('usagers.index');
 

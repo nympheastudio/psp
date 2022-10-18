@@ -8,10 +8,15 @@
   <thead>
     <tr>
       <th scope="col" style="width:2%">id</th>
-      <th scope="col" style=" width:5%">type intervention</th>
-      <th scope="col" style=" width:5%">resultat</th>
-      <th scope="col" style=" width:5%">categorie</th>
-      <th scope="col"style=" width:7%">nom</th>
+      <th scope="col" style=" width:5%">Type</th>
+      <th scope="col" style=" width:5%">Statut</th>
+      <th scope="col" style=" width:5%">Categorie</th>
+	  <th scope="col" style=" width:5%">Thème</th>
+      
+	  <th scope="col"style=" width:7%">Sous thème</th>
+	  <th scope="col"style=" width:7%">Usager</th>
+	  <th scope="col"style=" width:7%">Quartier</th>
+	  <th scope="col"style=" width:7%">Cat socioPro</th>
       <th scope="col" style=" width:17%">Actions</th>
     </tr>
   </thead>
@@ -29,12 +34,25 @@
 				{{ $u->resultat }}	
 			</td>
 			<td>
-				{{ DB::table('interventions_categorie')->find($u->id_interventions_categorie)->nom }}
+				
+				{{ $u->categorie }}
+</td>
+<td>
+				{{$u->thematique}}
+			</td>
+			<td>
+				{{ $u->sous_thematique }}
 			</td>
 			
 				<td>
-					<a href="{{ route('interventions.show', $u) }}" title="Lire l'article" >{{ App\Models\Usagers::getNamebyId($u->usager_id) }}</a>
+					<a href="{{ route('interventions.show', $u) }}" title="Lire l'article" >{{ $u->genre }} {{ $u->nom_beneficiaire }} {{ $u->age }}</a>
 				</td>
+				<td>
+{{ $u->quartier }}
+</td>
+<td>
+{{ $u->categorie_sociopro }}
+</td>
 				<td>
 					<a href="{{ route('interventions.edit', $u) }}" title="Modifier l'article" >Modifier</a>
 				

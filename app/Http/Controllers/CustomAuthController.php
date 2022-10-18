@@ -6,6 +6,7 @@ use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CrudEvents;
+use App\Models\Interventions;
 use DB;
 
 
@@ -140,6 +141,24 @@ class CustomAuthController extends Controller
                 $appointments = DB::table('crud_events')
                 ->where('id_user', '=',  $user_id)
                 ->get();
+
+                foreach($appointments as $d){
+                   
+             /*   if($d->intervention_id){
+
+                    $intervention = Interventions::find($d->intervention_id);
+                    if($intervention->usager_id != 0){
+                        $usager_name = DB::table('usagers')->where('id', '=', $intervention->usager_id)->first()->nom;
+                    }
+                    $categorie = DB::table('interventions_categorie')->where('id', '=', $intervention->id_interventions_categorie)->first()->nom; 
+                   
+                    $current_name = $categorie.' - '.$usager_name .$d->event_name;
+                   
+                    $d->event_name = $current_name;
+                  
+                }*/
+
+            }
        
     
         $data["appointments"] = $appointments;
@@ -161,7 +180,8 @@ class CustomAuthController extends Controller
             'is_admin' => $is_admin,
             'appointments' => $appointments
         ];
-        return  view('admin.dashboard_admin')->with($data);
+        return  view('dashboard')->with($data);
+        //return  view('admin.dashboard_admin')->with($data);
     }
        
     

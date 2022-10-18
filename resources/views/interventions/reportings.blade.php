@@ -10,11 +10,33 @@
 <p>Total Interventions en cours : {{ $total_interventions_current }}</p>
 
 <h2>Exports : </h2>
+<!--
 <ul>
 	<li><a href="#"> PSP Par médiateur</a></li>
 	<li><a href="#"> PSP Par tranche de date</a></li>
+</ul>-->
 
-	<script type="text/javascript">
+<form method="POST" action="https://psp.facevaucluse.com/reportings-export">
+@csrf
+<select name="users" >
+<option value="">Utilisateurs</option>
+@foreach ($users as $user)
+<option value="{{ $user->id }}">{{ $user->name }}</option>
+@endforeach
+</select>
+
+<br>
+
+<input type="date" name="date_start" value="" placeholder="Date de début">
+<br>
+<input type="date" name="date_end" value="" placeholder="Date de fin">
+
+<input type="submit" value="Exporter les interventions" >
+
+
+</form>
+
+<script type="text/javascript">
 $(document).ready(function(){
 
 

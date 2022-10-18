@@ -7,22 +7,43 @@
 @endsection
 @section('contenu')
 <div class="container">
+@if(session()->has('error'))
+    <div class="alert alert-error">
+        {{ session()->get('error') }}
+    </div>
+@endif
 <form method="POST" action="https://psp.facevaucluse.com/create-event">
 @csrf
 <div class="form-group">
 <label for="title">Titre</label>
-<input type="text" class="form-control" id="title" name="event_name" placeholder="Titre">
+<input type="text" class="form-control" id="title" name="event_name" placeholder="Titre" value="{{ old('event_name') }}">
 
 </div>
 <div class="form-group">
 <label for="start">Date de début</label>
-<input type="datetime-local" class="form-control" id="start" name="event_start" placeholder="Date de début">
+<input type="datetime-local" class="form-control" id="start" name="event_start" placeholder="Date de début" value="{{ old('event_start') }}">
 
 </div>
 <div class="form-group">
 <label for="end">Date de fin</label>
-<input type="datetime-local" class="form-control" id="end" name="event_end" placeholder="Date de fin">
+<input type="datetime-local" class="form-control" id="end" name="event_end" placeholder="Date de fin" value="{{ old('event_end') }}">
 
+</div>
+
+<div class="form-group">
+<label for="url">Poste</label>    
+<select class="form-control" id="poste" name="poste">
+<option value="0">Sélectionner un poste</option>
+
+  @foreach($postes as $poste)
+ 
+  <option 
+  @if (old('poste') == $poste->id) selected @endif
+
+  value="{{$poste->id}}">
+  {{$poste->nom}}</option>
+  @endforeach
+</select>
 </div>
 
 <div class="form-group">
@@ -34,6 +55,10 @@
 <div class="form-group">
 <label for="user">Utilisateur</label>
 <select class="form-control" id="user" name="user_id">
+@if (Auth::user()->role == 'mediateur' )
+<option value="{{Auth::user()->id}}">Moi ({{Auth::user()->name}})</option>
+@endif
+
 @foreach($users as $user)
 <option value="{{$user->id}}">{{$user->name}}</option>
 @endforeach

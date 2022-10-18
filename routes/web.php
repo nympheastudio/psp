@@ -20,6 +20,7 @@ Route::get('/', [CustomAuthController::class, 'index'])->name('login');
 Route::get('documents', [CustomAuthController::class, 'documents']); 
 
 Route::get('reportings', [InterventionsController::class, 'reportings'])->name('interventions.reportings');
+Route::post('reportings-export', [InterventionsController::class, 'reportingsExport'])->name('interventions.reportingsExport');
 
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');

@@ -91,6 +91,8 @@
   no-repeat;
   z-index: 1;
 }
+
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -110,7 +112,7 @@
 </div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  @auth
   <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       
@@ -135,6 +137,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>--}}
   </div>
+  @endauth
 </nav>
 
 <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -193,6 +196,9 @@ aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 <div>
 <a class="nav-link" href="https://psp.facevaucluse.com/dashboard">Mon Agenda</a><br>
 <a class="nav-link" href="https://psp.facevaucluse.com/create-event">Créer RDV</a><br>
+@if (Auth::user()->role == 'admin' )
+<a class="nav-link" href="https://psp.facevaucluse.com/agenda-global">Agenda Global</a><br>
+@endif
 </div>
 </li>
 
@@ -233,9 +239,9 @@ aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 <li>
 <div>Admin</div>
 <div>
-<a class="nav-link" href="https://psp.facevaucluse.com/agenda-global">Agenda Global</a><br>
+
 <a class="nav-link" href="https://psp.facevaucluse.com/users">Utilisateurs</a><br>
-<a class="nav-link" href="https://psp.facevaucluse.com/registration"  >Créer un utilisateur</a>
+<a class="nav-link" href="https://psp.facevaucluse.com/registration"  >Créer un utilisateur</a><br>
 <a class="nav-link" href="https://psp.facevaucluse.com/listes">Listes statiques</a><br>
 
 </div>
@@ -288,7 +294,11 @@ if (goto2Https.indexOf('http://')==0){window.location.href = goto2Https.replace(
   $(document).ready(function(){
     
     
-    
+$(".alert").fadeTo(2000, 500).slideUp(500, function(){
+    $(".alert").slideUp(500);
+});
+
+
     
     /* 
     $('input[type=text]').mouseover(function(){

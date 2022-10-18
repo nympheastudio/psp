@@ -82,7 +82,7 @@
 
       <nav aria-label="breadcrumb" class="d-none d-lg-block" id="breadcrumbs">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item invisible">Home</li>
+          <li class="breadcrumb-item invisible">Accueil</li>
         </ol>
       </nav>
 

@@ -3,26 +3,54 @@
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <style>
+.fc-day-grid-event > .fc-content {
+    white-space: normal;
+    color: white;
+}
+
+</style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
 
 @endsection
 @section('contenu')
-<div class="container mt-5" style="max-width: 700px">
+<div class="container">
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
        <div id='full_calendar_events'></div>
     </div>
+
 @endsection
 @section('footer')
 
-{{-- Scripts
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> --}}
+{{-- Scripts <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/fr.min.js" integrity="sha512-vz2hAYjYuxwqHQAgHPZvry+DTuwemFT/aBIDmgE0cnmYENu/+t8c3u/nX2Ont6e+3m+W6FEKxN1granjgGfr1Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function () {
+
+
             var SITEURL = "{{ url('/') }}";
+            var user = '{{ Auth::user()->params }}';
+           // console.log(user);
+            //event_bgcolor:red,last_login:01012022
+            var user_params = user.split(',');
+            var event_bgcolor = user_params[0].split(':');
+            var last_login = user_params[1].split(':');
+
+            var userBgColor = 'green';
+            if(event_bgcolor){
+                userBgColor = event_bgcolor[1];
+            }
+
+
+           
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -31,10 +59,13 @@
             var calendar = $('#full_calendar_events').fullCalendar({
                 locale: 'fr',
                 editable: true,
+                height: 'auto',
                // editable: true,
                 //events: SITEURL + "/calendar-event",
                
                 displayEventTime: true,
+                timeFormat: 'HH:mm',
+
                 eventRender: function (event, element, view) {
                     if (event.allDay === 'true') {
                         event.allDay = true;
@@ -105,15 +136,29 @@
                                 displayMessage("RDV supprimé");
                             }
                         });
+
+
+
                     }*/
-                    document.location.href = event.url;
+
+                  
                 },
+                eventRender: function(event, element, calEvent) {
+                    //console.log(event);
+                   // console.log(element);
+                  //  console.log(calEvent);
+                 element.find(".fc-title").after("<img rel='"+event.id+"' class='delete_rdv' src=\"https://psp.facevaucluse.com/public/img/delete.png\" height='20px' width='20'px' />");
+
+                
+                
+        },
                 events : [
                   @foreach($appointments as $appointment)
                   {
-                   title : '{{ $appointment->event_name }} ',
+                    id: '{{ $appointment->id }}', 
+                    title : '{{ $appointment->event_name }} ',
                       start : '{{ $appointment->event_start }}',
-                    
+                      backgroundColor : userBgColor,
                      
                       @if ($appointment->event_end)
                               end: '{{ $appointment->event_end }}',
@@ -126,68 +171,67 @@
                   },
                   @endforeach
               ],
-/*
-                events: [
-      {
-        title: 'tts la journée',
-        start: '2022-10-01'
-      },
-      {
-        title: 'Long',
-        start: '2022-10-07',
-        end: '2022-10-10',
-        color: 'purple' // override!
-      },
-      {
-        groupId: '999',
-        title: 'RepetEvent',
-        start: '2022-10-09T16:00:00'
-      },
-      {
-        groupId: '999',
-        title: 'RepetEvent',
-        start: '2022-10-16T16:00:00'
-      },
-      {
-        title: 'Conference',
-        start: '2022-10-11',
-        end: '2022-10-13',
-        color: 'purple' // override!
-      },
-      {
-        title: 'test Meeting',
-        start: '2022-10-12T10:30:00',
-        end: '2022-10-12T12:30:00'
-      },
-      {
-        title: 'Reunion',
-        start: '2022-10-12T12:00:00'
-      },
-      {
-        title: 'RDV usager 3',
-        start: '2022-10-12T14:30:00'
-      },
-      {
-        title: 'test',
-        start: '2022-10-13T07:00:00'
-      },
-      {
-        title: 'Médiation',
-        url: 'https://psp.facevaucluse.com/interventions/1/edit',
-        start: '2022-10-28'
-      }
-    ]
-*/
+
 
 
 
 
             });
 
+$('.delete_rdv').on("click", function(event) {
+           // $('.delete_rdv').click(function(event) {
+                    var eventDelete = confirm("Etes vous sur de vouloir supprimer ce RDV ?");
+                    var id_to_delete = $(this).attr('rel');
+                    if (eventDelete) {
+                        $.ajax({
+                            type: "POST",
+                            url: SITEURL + '/calendar-crud-ajax',
+                            data: {
+                                id: id_to_delete,
+                                type: 'delete'
+                            },
+                            success: function (response) {
+                                calendar.fullCalendar('removeEvents',id_to_delete);
+                                displayMessage("RDV supprimé");
+                            }
+                        });
+                    }
+                 });
+
+                 $(".fc-title").click(function(event) {
+
+                    if($(e.target).is(".delete_rdv") ){
+                    e.preventDefault();
+                 }
+
+                    document.location.href = event.url;
+                 });
+
+
+
+  $(document).on("contextmenu", "#full_calendar_events", function(e){
+    console.log('contextmenu', e);
+    /*var id = this.id;
+      $("#txt_id").val(id);
+ 
+      var top = e.pageY+5;
+      var left = e.pageX;
+
+      // Show contextmenu
+      $(".context-menu").toggle(100).css({
+          top: top + "px",
+          left: left + "px"
+      });
+  
+      // disable default context menu
+      return false;*/
+   return false;
+});
            
         });
         function displayMessage(message) {
             toastr.success(message, 'Event');            
         }
     </script>
+
 @endsection

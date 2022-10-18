@@ -17,15 +17,18 @@
 </select>
 		</p>
 		<p>
-			<label for="age" >Age</label><br/>
-			<select name="age" >
-				<option>Sélectionner un age</option>
-			@foreach ($ages as $a)
-	<option value="{{ $a->id}}">{{ $a->nom}}</option>
-@endforeach
-</select>
+			<label for="age" >Date de naissance</label><br/>
+			<input name="dob" type="date" value="{{ old('dob') }}" />
 		</p>
+<p>
+<label for="genre" >Genre</label><br/>
+<select name="genre" id="genre">
+<option>Sélectionner un genre</option>
+<option value="mr">Monsieur</option>
+<option value="mme">Madame</option>
 
+</select>
+</p>
 		<p>
 			<label for="nom" >Nom</label><br/>
 			<input type="text" name="nom" value="{{ old('nom') }}"  id="nom" placeholder="Nom" >

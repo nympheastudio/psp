@@ -17,9 +17,6 @@
 <a class="nav-link" href="#documents" role="tab" data-toggle="tab"  >Documents</a>
 </li>  
 
-<li class="nav-item">
-<a class="nav-link" href="#documents" role="tab" data-toggle="tab"  >Documents</a>
-</li>  
 
 <li class="nav-item">
 <a class="nav-link" href="#rdvs" role="tab" data-toggle="tab"  >RDVs</a>

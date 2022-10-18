@@ -10,6 +10,10 @@
     <tr>
       
       <th scope="col" style=" width:5%">Nom</th>
+	  <th scope="col" style=" width:5%">Prénom</th>
+	  <th scope="col" style=" width:5%">Genre</th>
+	  <th scope="col" style=" width:5%">Age</th>
+	  <th scope="col" style=" width:5%">Quartier</th>
 
       <th scope="col" style=" width:17%">Actions</th>
     </tr>
@@ -23,6 +27,10 @@
 					<!-- Lien pour afficher un Post : "posts.show" -->
 					<a href="{{ route('usagers.show', $u) }}" title="Lire l'article" >{{ $u->nom }}</a>
 				</td>
+				<td>{{ $u->prenom }}</td>
+				<td>{{ $u->genre }}</td>
+				<td>{{ $u->age }}</td>
+				<td>{{ $u->quartier }}</td>
 				<td>
 					<!-- Lien pour modifier un Post : "posts.edit" -->
 					<a href="{{ route('usagers.edit', $u) }}" title="Modifier l'article" >Modifier</a>
