@@ -69,7 +69,33 @@
 			@endforeach
 		</tbody>
 	</table>
-
+	<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" href="https://psp.facevaucluse.com/interventions/create">
+        <i class="large material-icons">+</i>
+    </a>
+    <!-- <ul>
+        <li>
+            <a id="first-fab" class="btn-floating" data-fabcolor="#45d1ff" href="https://psp.facevaucluse.com/create-event">
+                <i class="material-icons">Créer un RDV</i>
+            </a>
+        </li>
+       <li>
+            <a id="second-fab" class="btn-floating" data-fabcolor="#7345ff">
+                <i class="material-icons">format_quote</i>
+            </a>
+        </li>
+        <li>
+            <a id="third-fab" class="btn-floating" data-fabcolor="#0084ff">
+                <i class="material-icons">publish</i>
+            </a>
+        </li>
+        <li>
+            <a id="fourth-fab" class="btn-floating" data-fabcolor="#ff7345">
+                <i class="material-icons">attach_file</i>
+            </a>
+        </li>
+    </ul>-->
+</div>
 	<script type="text/javascript">
 $(document).ready(function(){
 

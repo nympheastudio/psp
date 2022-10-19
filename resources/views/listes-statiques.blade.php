@@ -37,7 +37,7 @@
 
 <h2>Postes : </h2>
 @foreach ($postes as $p)
-	{{ $p->poste}}<br>
+	Poste {{ $p->nom}}<br>
 @endforeach
 
 <br><hr>

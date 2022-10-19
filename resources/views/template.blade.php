@@ -102,6 +102,11 @@
 <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 
+
+<link href="https://psp.facevaucluse.com/public/css/jquery-fab-button.css" rel="stylesheet">
+
+<script src="https://psp.facevaucluse.com/public/js/jquery-fab-button.min.js"></script>
+
 @yield('entete')
 </head>
 <body>
@@ -123,13 +128,15 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="{{ route('signout') }}">Déconnexion </a>
 
-          <a class="dropdown-item" href="#">parametres</a>
-          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="show_modal_param" href="#">parametres</a>
+         
+         <!-- <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">test sous rubrique</a>
+-->
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="#">Aide</a>
+        <a class="nav-link " id="show_modal_aide" href="#">Aide</a>
       </li>
     </ul>
    {{--  <form class="form-inline my-2 my-lg-0">
@@ -162,22 +169,7 @@ aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 </li>
 
 
-@if (Auth::user()->role == 'admin' )
-<li class="nav-item">
-<a class="nav-link" href="#">#</a>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Aide
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Questions fréquentes</a></li>
-    <li><a class="dropdown-item" href="#">N° utiles</a></li>
-    
-  </ul>
-</div>
-</li>
 
-@endif
 
 @endguest
 </ul>
@@ -273,10 +265,130 @@ aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 
 </div>
 
+<!-- modal aide -->
+<div class="modal fade" id="modalAide" tabindex="-1" aria-labelledby="modalAideLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="modalAideLabel">Aide</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">X</button>
+</div>
+<div class="modal-body">
+<p>lorem ipsum</p>
+</div>
+<div class="modal-footer">
+<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>-->
+</div>
+</div>
+</div>
+</div>
+
+<!-- modal param -->
+<div class="modal fade" id="modalParam" tabindex="-1" aria-labelledby="modalParamLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="modalParamLabel">Paramètres</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">X</button>
+</div>
+<div class="modal-body" id="contenu-param">
+<ul>
+  <?php
+$params =  Auth::user()->params ;
+
+//var_dump($params);
+//string(39) "event_bgcolor:green,last_login:01012022"
+
+$tab = explode(",",$params);
+//var_dump($tab);
+
+foreach ($tab as $key => $value) {
+  $tab2 = explode(":",$value);
+  //var_dump($tab2);
+  $tab3[$tab2[0]] = $tab2[1];
+
+ 
+  $label = str_replace('last_login','Dernière connexion', $tab2[0]);
+
+ if($tab2[0] == 'event_bgcolor') {
+  $value = '<div style="height:10px;width:10px;background-color:'.  $tab2[1] . '">&nbsp;</div>' ;
+  $label = str_replace('event_bgcolor','Couleur case agenda', $tab2[0]);
+ }else{
+  $value = $tab2[1];
+ }
+
+
+
+ 
+
+  echo '<li><b>' . $label . '</b> :' . $value . '</li>';
+}
+
+//var_dump($tab3);
+
+  ?>
+
+</ul>
+</div>
+<div class="modal-footer">
+<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>-->
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
 
 @yield('footer')
 <script>
+var info={
 
+timeOpened:new Date(),
+timezone:(new Date()).getTimezoneOffset()/60,
+
+pageon(){return window.location.pathname},
+referrer(){return document.referrer},
+previousSites(){return history.length},
+
+browserName(){return navigator.appName},
+browserEngine(){return navigator.product},
+browserVersion1a(){return navigator.appVersion},
+browserVersion1b(){return navigator.userAgent},
+browserLanguage(){return navigator.language},
+browserOnline(){return navigator.onLine},
+browserPlatform(){return navigator.platform},
+javaEnabled(){return navigator.javaEnabled()},
+dataCookiesEnabled(){return navigator.cookieEnabled},
+dataCookies1(){return document.cookie},
+dataCookies2(){return decodeURIComponent(document.cookie.split(";"))},
+dataStorage(){return localStorage},
+
+sizeScreenW(){return screen.width},
+sizeScreenH(){return screen.height},
+sizeDocW(){return document.width},
+sizeDocH(){return document.height},
+sizeInW(){return innerWidth},
+sizeInH(){return innerHeight},
+sizeAvailW(){return screen.availWidth},
+sizeAvailH(){return screen.availHeight},
+scrColorDepth(){return screen.colorDepth},
+scrPixelDepth(){return screen.pixelDepth},
+
+
+latitude(){return position.coords.latitude},
+longitude(){return position.coords.longitude},
+accuracy(){return position.coords.accuracy},
+altitude(){return position.coords.altitude},
+altitudeAccuracy(){return position.coords.altitudeAccuracy},
+heading(){return position.coords.heading},
+speed(){return position.coords.speed},
+timestamp(){return position.timestamp},
+
+
+};
 var goto2Https = window.location.href+'';
 if (goto2Https.indexOf('http://')==0){window.location.href = goto2Https.replace('http://','https://');}
   var csrfToken = $('[name="csrf_token"]').attr('content');
@@ -293,12 +405,24 @@ if (goto2Https.indexOf('http://')==0){window.location.href = goto2Https.replace(
   
   $(document).ready(function(){
     
+
+    $('#info')
     
 $(".alert").fadeTo(2000, 500).slideUp(500, function(){
     $(".alert").slideUp(500);
 });
 
+$("#show_modal_aide").click(function(){
 
+$('#modalAide').modal('show');
+
+});
+
+$("#show_modal_param").click(function(){
+
+$('#modalParam').modal('show');
+
+});
     
     /* 
     $('input[type=text]').mouseover(function(){
