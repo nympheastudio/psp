@@ -125,7 +125,7 @@ $('#show_tree').click(function (e) {
   toggleMobileTree();
 });
 
-$('#main').click(function (e) {
+$('#main_filemanager').click(function (e) {
   if ($('#tree').hasClass('in')) {
     toggleMobileTree(false);
   }
@@ -480,6 +480,7 @@ function loadItems(page) {
 
       $('#working_dir').val(working_dir);
       console.log('Current working_dir : ' + working_dir);
+      
       var breadcrumbs = [];
       var validSegments = working_dir.split('/').filter(function (e) { return e; });
       validSegments.forEach(function (segment, index) {

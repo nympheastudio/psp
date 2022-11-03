@@ -5,16 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PSP</title>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.0/dist/css/bootstrap.min.css">
-{{--<link rel="stylesheet" href="https://psp.facevaucluse.com/public/css/bootstrap.min.css" />--}}
-<link rel="stylesheet" href="https://psp.facevaucluse.com/public/js/Accordion.JS-master/accordion.css" />
-<link rel="stylesheet" href=" //cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 
-
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.5.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css">
 <link rel="stylesheet" href="https://psp.facevaucluse.com/public/css/nymphea.css" />
 <style>
 .psp-Switch > input[type="checkbox"] {
@@ -94,6 +85,29 @@
 
 
 </style>
+
+  <!-- Favicons -->
+  <link href="https://psp.facevaucluse.com/public/assets/img/favicon.png" rel="icon">
+  <link href="https://psp.facevaucluse.com/public/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://psp.facevaucluse.com/public/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://psp.facevaucluse.com/public/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://psp.facevaucluse.com/public/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://psp.facevaucluse.com/public/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="https://psp.facevaucluse.com/public/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="https://psp.facevaucluse.com/public/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="https://psp.facevaucluse.com/public/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Template Main CSS File -->
+  <link href="https://psp.facevaucluse.com/public/assets/css/style.css" rel="stylesheet">
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -110,439 +124,552 @@
 @yield('entete')
 </head>
 <body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
 
-<nav class="navbar navbar-expand-lg  bg-primary">
-<div class='navbar-brand'>
-<img src="https://facevaucluse.com/images/logo.jpg" class="img-fluid" alt="PSP" style="width: auto; height: 50px;">
-</div><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  @auth
-  <div class="collapse navbar-collapse " id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{Auth::user()->name}} ({{Auth::user()->role}})
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{{ route('signout') }}">Déconnexion </a>
-
-          <a class="dropdown-item" id="show_modal_param" href="#">parametres</a>
-         
-         <!-- <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">test sous rubrique</a>
--->
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " id="show_modal_aide" href="#">Aide</a>
-      </li>
-    </ul>
-   {{--  <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>--}}
-  </div>
-  @endauth
-</nav>
-
-<!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>-->
-</button>
-<div class="collapse navbar-collapse" id="navbarNav">
-<ul class="navbar-nav">
-@guest
-<li class="nav-item">
-<a class="nav-link" href="{{ route('login') }}">Se connecter</a>
-</li>
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="../../../../" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">PSP</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
 
 
-@else
+    @auth
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        
+
+       
+
+        
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                       <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::user()->name}}</span>
+          </a><!-- End Profile Iamge Icon -->
 
 
 
 
-<li class="nav-item">
-<a class="nav-link" href="{{ route('signout') }}">Déconnexion {{Auth::user()->name}} ({{Auth::user()->role}})</a>
-</li>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>{{Auth::user()->name}}</h6>
+              <span>{{Auth::user()->role}}</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
+           
 
+            <li>
+              <a class="dropdown-item d-flex align-items-center" id="show_modal_param" href="#">
+                <i class="bi bi-gear"></i>
+                <span>Parametres</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
+           
 
-@endguest
-</ul>
-</div>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('signout') }}">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Déconnexion</span>
+              </a>
+            </li>
 
-</nav>
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
 
-@auth
-<div id="menu" >
-
-<ul id="my-accordion" class="accordionjs">
-
-
-<li>
-<div>Agenda</div>
-<div>
-<a class="nav-link" href="https://psp.facevaucluse.com/dashboard">Mon Agenda</a><br>
-<a class="nav-link" href="https://psp.facevaucluse.com/create-event">Créer RDV</a><br>
-@if (Auth::user()->role == 'admin' )
-<a class="nav-link" href="https://psp.facevaucluse.com/agenda-global">Agenda Global</a><br>
-@endif
-</div>
-</li>
-
-<!-- Section 1 -->
-<li>
-<div>Interventions</div>
-<div>
-<a class="nav-link" href="https://psp.facevaucluse.com/interventions">Lister</a><br>
-<a class="nav-link" href="{{ route('interventions.create') }}"  >Créer une intervention</a>
-</div>
-</li>
-
-<!-- Section 2 -->
-<li>
-<div>Usagers</div>
-<div>
-
-<a class="nav-link" href="https://psp.facevaucluse.com/usagers">Lister</a><br>
-<a class="nav-link" href="{{ route('usagers.create') }}"  >Créer un usager</a>
-
-</div>
-</li>
-
-
-@if (Auth::user()->role == 'admin' )
-
-
-
-<li>
-<div>Reportings</div>
-<div>
-
-<a class="nav-link" href="https://psp.facevaucluse.com/reportings">Reportings</a>
-
-</div>
-</li>
-
-<li>
-<div>Admin</div>
-<div>
-
-<a class="nav-link" href="https://psp.facevaucluse.com/users">Utilisateurs</a><br>
-<a class="nav-link" href="https://psp.facevaucluse.com/registration"  >Créer un utilisateur</a><br>
-<a class="nav-link" href="https://psp.facevaucluse.com/listes">Listes statiques</a><br>
-
-</div>
-</li>
-
-@endif
-<li>
-<div>Documents</div>
-<div>
-
-<a class="nav-link" href="https://psp.facevaucluse.com/filemanager">Documents</a><br>
-
-
-</div>
-</li>
-
-</ul>
-
-
-
-</div>
+      </ul>
+    </nav><!-- End Icons Navigation -->
 @endauth
-<div id="contenu_template" >
+  </header><!-- End Header -->
 
+  @auth
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
 
+    <ul class="sidebar-nav" id="sidebar-nav">
 
+      <li class="nav-item">
+      <a class="nav-link" href="https://psp.facevaucluse.com/">
+          <i class="bi bi-grid"></i>
+          <span>Accueil</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
 
-@yield('contenu')
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Agenda</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+          <a class="nav-link" href="https://psp.facevaucluse.com/dashboard">
+              <i class="bi bi-circle"></i><span>Mon Agenda</span>
+            </a>
+          </li>
+          <li>
+          <a class="nav-link" href="https://psp.facevaucluse.com/create-event">
+              <i class="bi bi-circle"></i><span>Créer un RDV</span>
+            </a>
+          </li>
+          @if (Auth::user()->role == 'admin' )
+  
+  <li>
+  <a class="nav-link" href="https://psp.facevaucluse.com/agenda-global">
+              <i class="bi bi-circle"></i><span>Agenda Global</span>
+            </a>
+          </li>
+  @endif
+          
+         
+        </ul>
+      </li><!-- End Agenda Nav -->
 
-</div>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Interventions</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+          <a class="nav-link" href="https://psp.facevaucluse.com/interventions">
+              <i class="bi bi-circle"></i><span>Liste d'interventions</span>
+            </a>
+          </li>
+          <li>
+          <a class="nav-link" href="{{ route('interventions.create') }}"  >
+              <i class="bi bi-circle"></i><span>Créer une intervention</span>
+            </a>
+          </li>
+        
+        </ul>
+      </li><!-- End Interventions Nav -->
 
-<!-- modal aide -->
-<div class="modal fade" id="modalAide" tabindex="-1" aria-labelledby="modalAideLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="modalAideLabel">Aide</h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">X</button>
-</div>
-<div class="modal-body">
-<p>lorem ipsum</p>
-</div>
-<div class="modal-footer">
-<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>-->
-</div>
-</div>
-</div>
-</div>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-person"></i><span>Usagers</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+          <a class="nav-link" href="https://psp.facevaucluse.com/usagers">
+              <i class="bi bi-circle"></i><span>Liste des usagers</span>
+            </a>
+          </li>
+          <li>
+          <a class="nav-link" href="{{ route('usagers.create') }}"  >
+              <i class="bi bi-circle"></i><span>Créer un usager</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Tables Nav -->
 
-<!-- modal param -->
-<div class="modal fade" id="modalParam" tabindex="-1" aria-labelledby="modalParamLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="modalParamLabel">Paramètres</h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">X</button>
-</div>
-<div class="modal-body" id="contenu-param">
-<ul>
+      
+  @if (Auth::user()->role == 'admin' )
+  
+  
+
+  
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-bar-chart"></i><span>Reportings</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+          <a class="nav-link" href="https://psp.facevaucluse.com/reportings">
+              <i class="bi bi-circle"></i><span>Export PSP</span>
+            </a>
+          </li>
+         
+        </ul>
+      </li><!-- End Charts Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-gem"></i><span>Admin</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+          <a class="nav-link" href="https://psp.facevaucluse.com/users">
+              <i class="bi bi-circle"></i><span>Utilisateurs</span>
+            </a>
+          </li>
+          <li>
+          <a class="nav-link" href="https://psp.facevaucluse.com/registration"  >
+              <i class="bi bi-card-list"></i><span>Créer un utilisateur</span>
+            </a>
+          </li>
+          <li>
+          <a class="nav-link" href="https://psp.facevaucluse.com/listes">
+              <i class="bibi-question-circle"></i><span>Liste statiques</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Icons Nav -->
+
+      @endif
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="https://psp.facevaucluse.com/filemanager">
+          <i class="bi bi-file-earmark"></i>
+          <span>Documents</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+     
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+  @endauth
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1> </h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="https://psp.facevaucluse.com">Accueil</a></li>
+          <li class="breadcrumb-item active">&nbsp;</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    <div id="contenu_template" >
+  
+  
+  
+  
+  @yield('contenu')
+  
+  </div>
+  
+  <!-- modal aide -->
+  <div class="modal fade" id="modalAide" tabindex="-1" aria-labelledby="modalAideLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h5 class="modal-title" id="modalAideLabel">Aide</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">X</button>
+  </div>
+  <div class="modal-body">
+  <p>lorem ipsum</p>
+  </div>
+  <div class="modal-footer">
+  <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>-->
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  <!-- modal param -->
+  <div class="modal fade" id="modalParam" tabindex="-1" aria-labelledby="modalParamLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h5 class="modal-title" id="modalParamLabel">Paramètres</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">X</button>
+  </div>
+  <div class="modal-body" id="contenu-param">
+  <ul>
   <?php
-$params =  Auth::user()->params ;
+  if(isset($user)){
+    $params =  Auth::user()->params ;
+    
+    //var_dump($params);
+    //string(39) "event_bgcolor:green,last_login:01012022"
+    
+    $tab = explode(",",$params);
+    //var_dump($tab);
+    
+    foreach ($tab as $key => $value) {
+      $tab2 = explode(":",$value);
+      //var_dump($tab2);
+      $tab3[$tab2[0]] = $tab2[1];
+      
+      
+      $label = str_replace('last_login','Dernière connexion', $tab2[0]);
+      
+      if($tab2[0] == 'event_bgcolor') {
+        $value = '<div style="height:10px;width:10px;background-color:'.  $tab2[1] . '">&nbsp;</div>' ;
+        $label = str_replace('event_bgcolor','Couleur case agenda', $tab2[0]);
+      }else{
+        $value = $tab2[1];
+      }
+      
+      
+      
+      
+      
+      echo '<li><b>' . $label . '</b> :' . $value . '</li>';
+    }
+  }
+  //var_dump($tab3);
+  
+  ?>
+  
+  </ul>
+  </div>
+  <div class="modal-footer">
+  <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>-->
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
+  
+  
+  
+  
+ 
+  
+  
+  
 
-//var_dump($params);
-//string(39) "event_bgcolor:green,last_login:01012022"
+      </div>
+    </section>
 
-$tab = explode(",",$params);
-//var_dump($tab);
-
-foreach ($tab as $key => $value) {
-  $tab2 = explode(":",$value);
-  //var_dump($tab2);
-  $tab3[$tab2[0]] = $tab2[1];
+  </main><!-- End #main -->
 
  
-  $label = str_replace('last_login','Dernière connexion', $tab2[0]);
 
- if($tab2[0] == 'event_bgcolor') {
-  $value = '<div style="height:10px;width:10px;background-color:'.  $tab2[1] . '">&nbsp;</div>' ;
-  $label = str_replace('event_bgcolor','Couleur case agenda', $tab2[0]);
- }else{
-  $value = $tab2[1];
- }
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor Jhttps://psp.facevaucluse.com/public/S Files -->
+  <script src="https://psp.facevaucluse.com/public/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="https://psp.facevaucluse.com/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://psp.facevaucluse.com/public/assets/vendor/chart.js/chart.min.js"></script>
+  <script src="https://psp.facevaucluse.com/public/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="https://psp.facevaucluse.com/public/assets/vendor/quill/quill.min.js"></script>
+  <script src="https://psp.facevaucluse.com/public/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="https://psp.facevaucluse.com/public/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="https://psp.facevaucluse.com/public/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="https://psp.facevaucluse.com/public/assets/js/main.js"></script>
+  @yield('footer')
+  <script>
+  var info={
+    
+    timeOpened:new Date(),
+    timezone:(new Date()).getTimezoneOffset()/60,
+    
+    pageon(){return window.location.pathname},
+    referrer(){return document.referrer},
+    previousSites(){return history.length},
+    
+    browserName(){return navigator.appName},
+    browserEngine(){return navigator.product},
+    browserVersion1a(){return navigator.appVersion},
+    browserVersion1b(){return navigator.userAgent},
+    browserLanguage(){return navigator.language},
+    browserOnline(){return navigator.onLine},
+    browserPlatform(){return navigator.platform},
+    javaEnabled(){return navigator.javaEnabled()},
+    dataCookiesEnabled(){return navigator.cookieEnabled},
+    dataCookies1(){return document.cookie},
+    dataCookies2(){return decodeURIComponent(document.cookie.split(";"))},
+    dataStorage(){return localStorage},
+    
+    sizeScreenW(){return screen.width},
+    sizeScreenH(){return screen.height},
+    sizeDocW(){return document.width},
+    sizeDocH(){return document.height},
+    sizeInW(){return innerWidth},
+    sizeInH(){return innerHeight},
+    sizeAvailW(){return screen.availWidth},
+    sizeAvailH(){return screen.availHeight},
+    scrColorDepth(){return screen.colorDepth},
+    scrPixelDepth(){return screen.pixelDepth},
+    
+    
+    latitude(){return position.coords.latitude},
+    longitude(){return position.coords.longitude},
+    accuracy(){return position.coords.accuracy},
+    altitude(){return position.coords.altitude},
+    altitudeAccuracy(){return position.coords.altitudeAccuracy},
+    heading(){return position.coords.heading},
+    speed(){return position.coords.speed},
+    timestamp(){return position.timestamp},
+    
+    
+  };
+  var goto2Https = window.location.href+'';
+  if (goto2Https.indexOf('http://')==0){window.location.href = goto2Https.replace('http://','https://');}
+    var csrfToken = $('[name="csrf_token"]').attr('content');
+    
+    setInterval(refreshToken, 3600000); // 1 hour 
+    
+    function refreshToken(){
+      $.get('refresh-csrf').done(function(data){
+        csrfToken = data; // the new token
+      });
+    }
+    
+    setInterval(refreshToken, 3600000); // 1 hour 
 
 
+    function getTitleAndBreadCrumb(){
+      //change h1 and breadcrimb
+      const {
+        host, hostname, href, origin, pathname, port, protocol, search
+      } = window.location;
 
- 
+      let text2show = '';
+      /*
+      .pagetitle h1
+      .pagetitle .breadcrumb-item .active
+          */
+         switch(pathname){
+case "/dashboard": text2show = 'Agenda';break;
 
-  echo '<li><b>' . $label . '</b> :' . $value . '</li>';
+case "/documents": text2show = 'documents';break;
+
+case "/reportings": text2show = 'reportings';break;
+
+case "/login": text2show = 'login';break;
+case "/registration": text2show = 'register-user';break;
+case "/signout": text2show = 'signout';break;
+case "/users": text2show = 'users';break;
+case "/listes": text2show = 'listes';break;
+
+case "/agenda": text2show = 'Agenda';break;
+
+
+case "/create-event": text2show = 'Créer un RDV';break;
+
+case "/agenda-global": text2show = 'Agenda Global';break;
+
+
+case "/usagers": text2show = 'usagers';break;
+case "/usagers/create": text2show = 'Créer un usager';break;
+
+case "/usagers/{usager}/edit": text2show = 'usagers.edit';break;
+case "/interventions": text2show = 'interventions';break;
+case "/interventions/create": text2show = 'Créer une intervention';break;
+
+case "/filemanager": text2show = 'Documents';break;
+
+default: text2show = pathname;
+
+         }         
+         $('.pagetitle h1').text(text2show);
+         $('.breadcrumb .active').text(text2show);
+
+    }
+
+    //wait 1 second in javascript
+    function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
 }
 
-//var_dump($tab3);
-
-  ?>
-
-</ul>
-</div>
-<div class="modal-footer">
-<!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>-->
-</div>
-</div>
-</div>
-</div>
+delay(10).then(() => getTitleAndBreadCrumb());
 
 
-
-
-
-
-@yield('footer')
-<script>
-var info={
-
-timeOpened:new Date(),
-timezone:(new Date()).getTimezoneOffset()/60,
-
-pageon(){return window.location.pathname},
-referrer(){return document.referrer},
-previousSites(){return history.length},
-
-browserName(){return navigator.appName},
-browserEngine(){return navigator.product},
-browserVersion1a(){return navigator.appVersion},
-browserVersion1b(){return navigator.userAgent},
-browserLanguage(){return navigator.language},
-browserOnline(){return navigator.onLine},
-browserPlatform(){return navigator.platform},
-javaEnabled(){return navigator.javaEnabled()},
-dataCookiesEnabled(){return navigator.cookieEnabled},
-dataCookies1(){return document.cookie},
-dataCookies2(){return decodeURIComponent(document.cookie.split(";"))},
-dataStorage(){return localStorage},
-
-sizeScreenW(){return screen.width},
-sizeScreenH(){return screen.height},
-sizeDocW(){return document.width},
-sizeDocH(){return document.height},
-sizeInW(){return innerWidth},
-sizeInH(){return innerHeight},
-sizeAvailW(){return screen.availWidth},
-sizeAvailH(){return screen.availHeight},
-scrColorDepth(){return screen.colorDepth},
-scrPixelDepth(){return screen.pixelDepth},
-
-
-latitude(){return position.coords.latitude},
-longitude(){return position.coords.longitude},
-accuracy(){return position.coords.accuracy},
-altitude(){return position.coords.altitude},
-altitudeAccuracy(){return position.coords.altitudeAccuracy},
-heading(){return position.coords.heading},
-speed(){return position.coords.speed},
-timestamp(){return position.timestamp},
-
-
-};
-var goto2Https = window.location.href+'';
-if (goto2Https.indexOf('http://')==0){window.location.href = goto2Https.replace('http://','https://');}
-  var csrfToken = $('[name="csrf_token"]').attr('content');
-  
-  setInterval(refreshToken, 3600000); // 1 hour 
-  
-  function refreshToken(){
-    $.get('refresh-csrf').done(function(data){
-      csrfToken = data; // the new token
-    });
-  }
-  
-  setInterval(refreshToken, 3600000); // 1 hour 
-  
-  $(document).ready(function(){
-    
-
-    $('#info')
-    
-$(".alert").fadeTo(2000, 500).slideUp(500, function(){
-    $(".alert").slideUp(500);
-});
-
-$("#show_modal_aide").click(function(){
-
-$('#modalAide').modal('show');
-
-});
-
-$("#show_modal_param").click(function(){
-
-$('#modalParam').modal('show');
-
-});
-    
-    /* 
-    $('input[type=text]').mouseover(function(){
+   
+    $(document).ready(function(){
       
-      this.holder=$(this).attr('placeholder');
-      $(this).attr('alt', this.holder);
       
-    });*/
+      
+      $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+        $(".alert").slideUp(500);
+      });
+      
+      $("#show_modal_aide").click(function(){
+        
+        $('#modalAide').modal('show');
+        
+      });
+      
+      $("#show_modal_param").click(function(){
+        
+        $('#modalParam').modal('show');
+        
+      });
+      
     
-    
+      
+      
       //TABS
-  $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-    localStorage.setItem('activeTab', $(e.target).attr('href'));
-  });
-  var activeTab = localStorage.getItem('activeTab');
+      $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('href'));
+      });
+      var activeTab = localStorage.getItem('activeTab');
+      
+      if(activeTab){
+        
+        $( '#description' ).removeClass('active');
+        $('#myTab a[href="' + activeTab + '"]').tab('show');
+        
+        // alert(activeTab);
+        if(activeTab != '#validation'){
+          $('#enregistrer_demande').show();
+        }
+        
+        
+      }else{
+        
+        $( '#description' ).addClass('active');
+        $('#enregistrer_demande').show();
+        
+      }
+      
+      
+      
+      //TOOLTIP
+      $('[data-toggle="tooltip"]').tooltip();
+      
+      $('input:not(:disabled)').tooltip({
+        'template': '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+        'placement':'right',
+        'title': function(){
+          return $(this).attr('placeholder');
+        },
+      });
+      
+      $('select').tooltip({
+        'template': '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+        'placement':'right',
+        'title': function(){
+          let label = $(this).closest("p").find("label").text();
+          return label;
+        },
+      });
+
+      // foreach .mime-icon  add icon by filetype // each jquery
+
+/*
+
+$( ".mime-icon" ).each(function( index ) {
+  //$( this ).text() );
+ // let filetype = $( this ).attr('class').split(' ')[1];
+ $( this  + '.mime-icon .iso-docx').html('<img src="https://psp.facevaucluse.com/public/img/ico-docx.png" alt="docx" />');
+ $( this + ' .iso-xlsx').html('<img src="https://psp.facevaucluse.com/public/img/ico-xlsx.png" alt="xlsx" />');
+ $( this + ' .iso-pdf').html('<img src="https://psp.facevaucluse.com/public/img/ico-pdf.png" alt="pdf" />');
+
+
+});
+      
+   */
+      
+
+      
+
+      //.ico-pdf
   
-  if(activeTab){
-    
-    $( '#description' ).removeClass('active');
-    $('#myTab a[href="' + activeTab + '"]').tab('show');
-    
-    // alert(activeTab);
-    if(activeTab != '#validation'){
-      $('#enregistrer_demande').show();
-    }
-    
-    
-  }else{
-    
-    $( '#description' ).addClass('active');
-    $('#enregistrer_demande').show();
-    
-  }
-    
-    
-    
-    //TOOLTIP
-    $('[data-toggle="tooltip"]').tooltip();
-    
-    $('input:not(:disabled)').tooltip({
-      'template': '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
-      'placement':'right',
-      'title': function(){
-        return $(this).attr('placeholder');
-      },
+      
     });
+
     
-    $('select').tooltip({
-      'template': '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
-      'placement':'right',
-      'title': function(){
-        let label = $(this).closest("p").find("label").text();
-        return label;
-      },
-    });
-    
-  });
-  
-  </script>
-  <script>
-  /* const loaderContainer = document.querySelector('.loader-container');
-  
-  window.addEventListener('load', () => {
-    loaderContainer.classList.add('fade-out');
-  });*/
-  
-  $(document).ready(function(){
-    $('#my-accordion').hide();
-    //agenda, interventions, usagers, documents, reportings, Equipe
-    let activeIndex = 1;
-    
-    if (window.location.href.includes('dashboard')) {
-      activeIndex = 1;
-    }
-    if (window.location.href.includes('interventions')) {
-      activeIndex = 2;
-    }
-    if (window.location.href.includes('usagers')) {
-      activeIndex = 3;
-    }
-    if (window.location.href.includes('filemanager')) {
-      activeIndex = 6;
-    }
-    if (window.location.href.includes('reportings')) {
-      activeIndex = 4;
-    }
-    if (window.location.href.includes('agenda-global')) {
-      activeIndex = 5;
-    }
-    if (window.location.href.includes('users')) {
-      activeIndex = 5;
-    }
-    if (window.location.href.includes('registration')) {
-      activeIndex = 5;
-    }
-    
-    
-    
-    $("#my-accordion").accordionjs({
-      // Allow self close.(data-close-able)
-      closeAble   : false,
-      
-      // Close other sections.(data-close-other)
-      closeOther  : true,
-      
-      // Animation Speed.(data-slide-speed)
-      slideSpeed  : 150,
-      
-      // The section open on first init. A number from 1 to X or false.(data-active-index)
-      activeIndex : activeIndex,
-      
-      // Callback when a section is open
-      openSection: function( section ){},
-      
-      // Callback before a section is open
-      beforeOpenSection: function( section ){},
-    });
-    
-    $('#my-accordion').show();
-  });
-  </script>
-  <script src="https://psp.facevaucluse.com/public/js/Accordion.JS-master/accordion.min.js"></script>
-  </body></html>
+    </script>
+   
+
+    </body></html>

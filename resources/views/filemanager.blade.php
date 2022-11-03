@@ -1,31 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- Chrome, Firefox OS and Opera -->
-  <meta name="theme-color" content="#333844">
-  <!-- Windows Phone -->
-  <meta name="msapplication-navbutton-color" content="#333844">
-  <!-- iOS Safari -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="#333844">
-
-  <title>{{ trans('laravel-filemanager::lfm.title-page') }}</title>
   <link rel="shortcut icon" type="image/png" href="{{ asset('vendor/laravel-filemanager/img/72px color.png') }}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.12.1/jquery-ui.min.css">
+
   <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/cropper.min.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/dropzone.min.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/mime-icons.min.css') }}">
   <style>{!! \File::get(base_path('vendor/unisharp/laravel-filemanager/public/css/lfm.css')) !!}</style>
   {{-- Use the line below instead of the above if you need to cache the css. --}}
   {{-- <link rel="stylesheet" href="{{ asset('/vendor/laravel-filemanager/css/lfm.css') }}"> --}}
-</head>
-<body>
-  <nav class="navbar sticky-top navbar-expand-lg navbar-dark" id="nav">
+ffdsdsffdsfdsdsf
+  <nav class="navbar sticky-top navbar-expand-lg " id="nav">
     <a class="navbar-brand invisible-lg d-none d-lg-inline" id="to-previous">
       <i class="fas fa-arrow-left fa-fw"></i>
       <span class="d-none d-lg-inline">{{ trans('laravel-filemanager::lfm.nav-back') }}</span>
@@ -77,14 +60,9 @@
   <div class="d-flex flex-row">
     <div id="tree"></div>
 
-    <div id="main">
+    <div id="mainfilemanager">
       <div id="alerts"></div>
 
-      <nav aria-label="breadcrumb" class="d-none d-lg-block" id="breadcrumbs">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item invisible">Accueil</li>
-        </ol>
-      </nav>
 
       <div id="empty" class="d-none">
         <i class="far fa-folder-open"></i>
@@ -274,6 +252,8 @@
       init: function() {
         var _this = this; // For the closure
         this.on('success', function(file, response) {
+
+          console.log ('dd '+response)
           if (response == 'OK') {
             loadFolders();
           } else {
@@ -288,5 +268,4 @@
       maxFilesize: ({{ $helper->maxUploadSize() }} / 1000)
     }
   </script>
-</body>
-</html>
+

@@ -11,7 +11,7 @@ a {
 }
 
 #nav, #nav .dropdown-menu, .bg-main {
-  background-color: #333844;
+  background-color: #acadaf;
 }
 
 #nav .dropdown-menu > a:hover {
@@ -51,12 +51,12 @@ a {
   color: #75C7C3;
 }
 
-#main {
+#main_filemanager {
   width: 100%;
 }
 
 @media screen and (min-width: 992px) {
-  #main {
+  #main_filemanager {
     width: calc(100% - 300px);
     /*margin-left: 1rem;*/
     padding: 1rem;

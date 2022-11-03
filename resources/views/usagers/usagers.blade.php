@@ -5,17 +5,17 @@
 		<!-- Lien pour créer un nouvel article : "posts.create" -->
 		<a href="{{ route('usagers.create') }}"  >Créer usager</a>
 	</p>
-	<table class="table table-hover table-sm"  id="liste_interventions" style="font-size:12px">
+	<table class="table table-hover datatable "  id="liste_usagers" >
   <thead>
     <tr>
       
-      <th scope="col" style=" width:5%">Nom</th>
-	  <th scope="col" style=" width:5%">Prénom</th>
+      <th scope="col" style=" width:15%">Nom</th>
+	  <th scope="col" style=" width:15%">Prénom</th>
 	  <th scope="col" style=" width:5%">Genre</th>
 	  <th scope="col" style=" width:5%">Age</th>
-	  <th scope="col" style=" width:5%">Quartier</th>
+	  <th scope="col" style=" width:15%">Quartier</th>
 
-      <th scope="col" style=" width:17%">Actions</th>
+      <th scope="col" style=" width:27%">Actions</th>
     </tr>
   </thead>
 
