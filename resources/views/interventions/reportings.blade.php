@@ -17,22 +17,27 @@
 </ul>-->
 
 <form method="POST" action="https://psp.facevaucluse.com/reportings-export">
+
+
+<div class="form-group">
 @csrf
-<select name="users" >
+<select name="users" class="form-select">
 <option value="">Utilisateurs</option>
 @foreach ($users as $user)
 <option value="{{ $user->id }}">{{ $user->name }}</option>
 @endforeach
 </select>
+</div>
+<div class="form-group">
 
-<br>
-
-<input type="date" name="date_start" value="" placeholder="Date de début">
-<br>
-<input type="date" name="date_end" value="" placeholder="Date de fin">
-
-<input type="submit" value="Exporter les interventions" >
-
+<input type="date" name="date_start" value="" placeholder="Date de début" class="form-control">
+</div>
+<div class="form-group">
+<input type="date" name="date_end" value="" placeholder="Date de fin" class="form-control"> 
+</div>
+<div class="form-group">
+<input type="submit" value="Exporter les interventions" class="btn btn-primary">
+</div>
 
 </form>
 

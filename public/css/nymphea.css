@@ -3,9 +3,9 @@ body{
   font-size: 14px;
 }
 
-textarea { height: 5em;width: 25em; }
-select { width: 25em; }
-input[type="text"] { width: 25em; }
+textarea { height: 5em;width: 100%; }
+select { width: 100%; }
+input[type="text"] { width: 100%; }
 
 .navbar-brand {
   -ms-transform: translateY(-35px);
@@ -566,22 +566,42 @@ input[type=number] {
 
 /* |||||||||||||||||||||||||| INTE NYMPHEA */
 
+#contenu_template {margin-bottom: 100px}
+#liste_interventions, #liste_users, #liste_usagers {background: #fff}
+#liste_users th:first-child  {width: 50% !important}
+#liste_interventions tr:nth-child(odd),#liste_users tr:nth-child(odd),#liste_usagers tr:nth-child(odd) {background: #f6f9ff; border: none}
+#liste_interventions tr, #liste_interventions td, #liste_interventions th,
+#liste_users tr, #liste_users td, #liste_users th,#liste_usagers tr, #liste_usagers td, #liste_usagers th {border: 0px; padding: 15px}
+#liste_interventions thead tr,#liste_users thead tr,#liste_usagers thead tr {background: none !important;}
+.form-group {margin: 15px 0}
+#liste_users p,#liste_users th {font-size: 16px}
 
-@font-face {
-  font-family: 'Albra';
-  src: url('https://psp.facevaucluse.com/public/fonts/Albra-Text-Black.eot');
-  src: local('?'), url('https://psp.facevaucluse.com/public/fonts/Albra-Text-Black.woff') format('woff'), 
-  url('https://psp.facevaucluse.com/public/fonts/Albra-Text-Black.ttf') format('truetype'), 
-  url('https://psp.facevaucluse.com/public/fonts/Albra-Text-Black.svg') format('svg');
-  font-weight: normal;
-  font-style: normal;
+.dataTable-selector,.dataTable-input {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-
-nav.navbar.bg-primary {
-  /* background: #e2d235 !important;*/
-  
+.dataTable-selector:focus,.dataTable-input:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
 }
+#intervention .radio-cat {margin: 40px auto}
+#intervention .radio-cat br {display: none}
+#intervention .radio-cat input {margin: 0 5px 0 50px}
+
 nav.navbar.bg-primary span {color: #221f1f}
 nav.navbar.bg-primary img {width: 60px; margin: 0px 15px 0 0; }
 nav.navbar .nav-link {background: #221f1f; border-radius: 25px; margin: 0 5px; padding: 5px 20px !important;color: #fff !important;transition: ease-in-out 0.5s all; -webkit-transition: ease-in-out 0.5s all}
@@ -590,11 +610,24 @@ nav.navbar .navbar-title {	font-family: 'Albra' !important}
 
 nav.navbar .navbar-nav {flex-direction: row-reverse;}
 #navbarNav {flex-direction: column-reverse !important; align-items: stretch  !important}
+.nav.nav-pills.nav-fill {background: #fff;box-shadow: 0 0px 11px 0 rgb(0 0 0 / 18%);border-radius: 0.5rem;margin: 0;padding: 0;}
 
+/* CALENDAR */
+
+#full_calendar_events .fc-view-container .fc-view.fc-month-view {box-shadow: 0 0px 11px 0 rgb(0 0 0 / 18%);padding: 30px; background: #fff;border-radius: 0.5rem;}
+#full_calendar_events .fc-view-container table td {background: #fff}
+#full_calendar_events .fc-view-container table .fc-content-skeleton td {background: none}
+#full_calendar_events .fc-view-container table td.fc-today {background: #00acd6}
+#full_calendar_events .fc-view-container table td.fc-past {background: #ced4da; opacity: 0.5}
+
+#full_calendar_events .fc-view-container .fc-event-container .fc-event {border: none;box-shadow: 0 0px 11px 0 rgb(0 0 0 / 18%)}
+#full_calendar_events .fc-view-container .fc-event-container .fc-content {padding: 5px; border: none; box-shadow: none}
+#full_calendar_events .fc-view-container .fc-event-container .fc-content .delete_rdv {background: #fff; padding: 10px; border-radius: 50px; margin-left: 10px;box-shadow: 0 0px 11px 0 rgb(0 0 0 / 18%), 0 0px 11px 0 rgb(0 0 0 / 18%);;}
 
 @media(max-width: 830px){
   nav.navbar {flex-direction: row;flex-wrap:  wrap !important;}
   #navbarNav {display: block !important; width: 100% !important; float: left}
   .navbar-brand {transform: none;}
 }
+
 

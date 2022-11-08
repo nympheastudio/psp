@@ -52,7 +52,7 @@
 {{ $u->categorie_sociopro }}
 </td>
 				<td class="text-center">
-        <a href="{{ route('interventions.edit', $u) }}" title="Modifier l'article"   class="btn"> <i class="bi bi-pencil-square"></i><div class="label">Modifier</div></a>
+        			<p><a href="{{ route('interventions.edit', $u) }}" title="Modifier l'article" class="btn btn-secondary">Modifier</a></p>
 				
 					<!-- Formulaire pour supprimer un Post : "posts.destroy" -->
 					<form method="POST" action="{{ route('interventions.destroy', $u) }}" >
@@ -61,9 +61,7 @@
 						<!-- <input type="hidden" name="_method" value="DELETE"> -->
 						@method("DELETE")
            
-						<button type="submit" class="btn">
-            <i class="bi bi-trash"></i><div class="label">Supprimer</div>
-          </button>
+						<button type="submit" class="btn btn-secondary"><div class="label">Supprimer</div></button>
 					</form>
 				</td>
 			</tr>

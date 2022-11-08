@@ -32,7 +32,7 @@
 
 <div class="form-group">
 <label for="url">Poste</label>    
-<select class="form-control" id="poste" name="poste">
+<select class="form-select" id="poste" name="poste">
 <option value="0">Sélectionner un poste</option>
 
   @foreach($postes as $poste)
@@ -54,7 +54,7 @@
 
 <div class="form-group">
 <label for="user">Utilisateur</label>
-<select class="form-control" id="user" name="user_id">
+<select class="form-select" id="user" name="user_id">
 @if (Auth::user()->role == 'mediateur' )
 <option value="{{Auth::user()->id}}">Moi ({{Auth::user()->name}})</option>
 @endif
@@ -66,25 +66,25 @@
 </select>
 </div>
 
-<div class="col-md-3">
-    <div class="form-group">
-        <label for="intervention">lier à une intervention existante :</label>
+
+  <div class="form-group">
+      <label for="intervention">lier à une intervention existante :</label>
 
 
-        <input id="intervention" name="intervention" type="text" list="intervention_datalist" class="form-control" placeholder="Lier à une intervention existante">
-        <datalist id="intervention_datalist">
-            @foreach($interventions as $intervention)
-            <option rel="{{$intervention->id}}" value="{{$intervention->usager}} {{$intervention->categorie}} {{$intervention->user}}" >
-            @endforeach
-        </datalist>
+      <input id="intervention" name="intervention" type="text" list="intervention_datalist" class="form-select" placeholder="Lier à une intervention existante">
+      <datalist id="intervention_datalist">
+          @foreach($interventions as $intervention)
+          <option rel="{{$intervention->id}}" value="{{$intervention->usager}} {{$intervention->categorie}} {{$intervention->user}}" >
+          @endforeach
+      </datalist>
 
 
 
-        <input type="hidden" name="intervention_id" id="intervention_id" value="">
-        
-        <span id="error" class="text-danger"></span>
-    </div>
-</div>
+      <input type="hidden" name="intervention_id" id="intervention_id" value="">
+      
+      <span id="error" class="text-danger"></span>
+  </div>
+
 
 <button type="submit" class="btn btn-primary">Ajouter</button>
 </form>

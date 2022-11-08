@@ -1,37 +1,37 @@
 @extends('template')
 @section('contenu')
 
-<p>
+<div>
 		<!-- Lien pour créer un nouvel article : "posts.create" -->
-		<a href="{{ route('usagers.create') }}"  >Créer usager</a>
-	</p>
+		<a href="{{ route('usagers.create') }}"  class="btn btn-primary">Créer usager</a>
+	</div>
 <form method="POST" action="{{ route('usagers.update',$usagers->id) }}" enctype="multipart/form-data" >
 
 		<!-- Le token CSRF -->
 		@csrf
 		
-		<p>
+		<div  class="form-group">
 			<label for="nom" >Nom</label><br/>
-			<input type="text" name="nom" value="{{ $usagers->nom }}"  id="nom" placeholder="Nom" >
+			<input type="text" name="nom" value="{{ $usagers->nom }}"  id="nom" placeholder="Nom"   class="form-control">
 
 			<!-- Le message d'erreur pour "title" -->
 			@error("nom")
 			<div>{{ $message }}</div>
 			@enderror
-		</p>
-		<p>
+		</div>
+		<div  class="form-group">
 			<label for="prenom" >Prénom</label><br/>
-			<input type="text" name="prenom" value="{{ $usagers->prenom }}"  id="prenom" placeholder="Prénom" >
+			<input type="text" name="prenom" value="{{ $usagers->prenom }}"  id="prenom" placeholder="Prénom"   class="form-control">
 
 			<!-- Le message d'erreur pour "title" -->
 			@error("prenom")
 			<div>{{ $message }}</div>
 			@enderror
-		</p>
+		</div>
 	
-
-		<input type="submit" name="valider" value="Valider" >
-
+		<div  class="form-group">
+			<input type="submit" name="valider" value="Valider"  class="btn btn-primary">
+		</div>
 	</form>
 
 

@@ -3,7 +3,7 @@
 
 <p>
 		<!-- Lien pour créer un nouvel article : "posts.create" -->
-		<a href="{{ route('usagers.create') }}"  >Créer usager</a>
+		<a href="{{ route('usagers.create') }}"  class="btn btn-primary">Créer usager</a>
 	</p>
 	<table class="table table-hover datatable "  id="liste_usagers" >
   <thead>
@@ -33,7 +33,7 @@
 				<td>{{ $u->quartier }}</td>
 				<td>
 					<!-- Lien pour modifier un Post : "posts.edit" -->
-					<a href="{{ route('usagers.edit', $u) }}" title="Modifier l'article" >Modifier</a>
+					<a href="{{ route('usagers.edit', $u) }}" title="Modifier l'article" class="btn btn-secondary">Modifier</a>
 				</td>
 				<td>
 					<!-- Formulaire pour supprimer un Post : "posts.destroy" -->
@@ -42,7 +42,7 @@
 						@csrf
 						<!-- <input type="hidden" name="_method" value="DELETE"> -->
 						@method("DELETE")
-						<input type="submit" value="x Supprimer" >
+						<input type="submit" value="Supprimer"  class="btn btn-secondary" >
 					</form>
 				</td>
 			</tr>

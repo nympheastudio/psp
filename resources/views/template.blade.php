@@ -70,7 +70,6 @@
   /*background-color:#EEEEEE;*/
   height: 100%;
   padding-left:10px;
-  overflow:auto;
 }
 
 .loader-container {
@@ -530,32 +529,21 @@
           */
          switch(pathname){
 case "/dashboard": text2show = 'Agenda';break;
-
 case "/documents": text2show = 'documents';break;
-
 case "/reportings": text2show = 'reportings';break;
-
-case "/login": text2show = 'login';break;
-case "/registration": text2show = 'register-user';break;
-case "/signout": text2show = 'signout';break;
-case "/users": text2show = 'users';break;
+case "/login": text2show = 'Connexion';break;
+case "/registration": text2show = 'Création utilisateur';break;
+case "/signout": text2show = 'Déconnexion';break;
+case "/users": text2show = 'Utilisateurs';break;
 case "/listes": text2show = 'listes';break;
-
 case "/agenda": text2show = 'Agenda';break;
-
-
 case "/create-event": text2show = 'Créer un RDV';break;
-
 case "/agenda-global": text2show = 'Agenda Global';break;
-
-
 case "/usagers": text2show = 'usagers';break;
 case "/usagers/create": text2show = 'Créer un usager';break;
-
-case "/usagers/{usager}/edit": text2show = 'usagers.edit';break;
+case "/usagers/{usager}/edit": text2show = 'Edition usager';break;
 case "/interventions": text2show = 'interventions';break;
 case "/interventions/create": text2show = 'Créer une intervention';break;
-
 case "/filemanager": text2show = 'Documents';break;
 
 default: text2show = pathname;

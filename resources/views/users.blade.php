@@ -3,15 +3,15 @@
 
 <p>
 		<!-- Lien pour créer un nouvel article : "posts.create" -->
-		<a href="https://psp.facevaucluse.com/registration"  >Créer utilisateur</a>
+		<a  href="https://psp.facevaucluse.com/registration" class="btn btn-primary" >Créer utilisateur</a>
 	</p>
-	<table class="table table-hover table-sm"  id="liste_interventions" style="font-size:12px">
+	<table class="table table-hover table-sm"  id="liste_users" style="font-size:12px">
   <thead>
     <tr>
       
-      <th scope="col" style=" width:5%">Nom</th>
-
-      <th scope="col" style=" width:17%">Actions</th>
+      <th scope="col" >Nom</th>
+      <th scope="col" >Actions</th>
+	  <th scope="col"></th>
     </tr>
   </thead>
 
@@ -20,12 +20,12 @@
 			@foreach ($users as $u)
 			<tr>
 				<td>
-					<!-- Lien pour afficher un Post : "posts.show" -->
-					<a href="{{ route('usagers.show', $u) }}" title="Lire l'article" >{{ $u->name }} {{ $u->prenom }}</a>
+					<!-- Lien pour afficher un Post : "posts.show" {{ route('usagers.show', $u) }} -->
+					<p>{{ $u->name }} {{ $u->prenom }}</p>
 				</td>
 				<td>
 					<!-- Lien pour modifier un Post : "posts.edit" -->
-					<a href="{{ route('usagers.edit', $u) }}" title="Modifier l'article" >Modifier</a>
+					<a href="{{ route('usagers.edit', $u) }}" title="Modifier l'utilisateur" class="btn btn-secondary">Modifier</a>
 				</td>
 				<td>
 					<!-- Formulaire pour supprimer un Post : "posts.destroy" -->
@@ -34,7 +34,7 @@
 						@csrf
 						<!-- <input type="hidden" name="_method" value="DELETE"> -->
 						@method("DELETE")
-						<input type="submit" value="x Supprimer" >
+						<input type="submit" value="Supprimer" class="btn btn-secondary">
 					</form>
 				</td>
 			</tr>
