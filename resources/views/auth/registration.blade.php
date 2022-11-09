@@ -8,7 +8,7 @@ Vous allez créer un nouveau membre de l'équipe Face Vaucluse<br>
                         <form action="{{ route('register.custom') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
-                                <select name="role" id="role" class="form-control">
+                                <select name="role" id="role" class=" form-select">
                                     
                                     <option value="mediateur">Médiateur</option>
                                     <option value="admin">Administrateur</option>

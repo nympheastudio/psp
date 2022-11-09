@@ -10,6 +10,7 @@
     <tr>
       
       <th scope="col" >Nom</th>
+	  <th scope="col" >Role</th>
       <th scope="col" >Actions</th>
 	  <th scope="col"></th>
     </tr>
@@ -24,12 +25,16 @@
 					<p>{{ $u->name }} {{ $u->prenom }}</p>
 				</td>
 				<td>
+					<!-- Lien pour afficher un Post : "posts.show" {{ route('usagers.show', $u) }} -->
+					<p>{{ $u->role }}</p>
+				</td>
+				<td>
 					<!-- Lien pour modifier un Post : "posts.edit" -->
-					<a href="{{ route('usagers.edit', $u) }}" title="Modifier l'utilisateur" class="btn btn-secondary">Modifier</a>
+					<a href="{{ route('users.edit', $u) }}" title="Modifier l'utilisateur" class="btn btn-secondary">Modifier</a>
 				</td>
 				<td>
 					<!-- Formulaire pour supprimer un Post : "posts.destroy" -->
-					<form method="POST" action="{{ route('usagers.destroy', $u) }}" >
+					<form method="POST" action="{{ route('users.destroy', $u) }}" >
 						<!-- CSRF token -->
 						@csrf
 						<!-- <input type="hidden" name="_method" value="DELETE"> -->

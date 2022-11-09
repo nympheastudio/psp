@@ -81,8 +81,12 @@
   no-repeat;
   z-index: 1;
 }
-
-
+[list] {
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 8px;
+}
+.badge{display:inline-block;padding:.25em .4em;font-size:75%;font-weight:700;line-height:1;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25rem}.badge:empty{display:none}.btn .badge{position:relative;top:-1px}.badge-pill{padding-right:.6em;padding-left:.6em;border-radius:10rem}.badge-primary{color:#fff;background-color:#007bff}.badge-primary[href]:focus,.badge-primary[href]:hover{color:#fff;text-decoration:none;background-color:#0062cc}.badge-secondary{color:#fff;background-color:#6c757d}.badge-secondary[href]:focus,.badge-secondary[href]:hover{color:#fff;text-decoration:none;background-color:#545b62}.badge-success{color:#fff;background-color:#28a745}.badge-success[href]:focus,.badge-success[href]:hover{color:#fff;text-decoration:none;background-color:#1e7e34}.badge-info{color:#fff;background-color:#17a2b8}.badge-info[href]:focus,.badge-info[href]:hover{color:#fff;text-decoration:none;background-color:#117a8b}.badge-warning{color:#212529;background-color:#ffc107}.badge-warning[href]:focus,.badge-warning[href]:hover{color:#212529;text-decoration:none;background-color:#d39e00}.badge-danger{color:#fff;background-color:#dc3545}.badge-danger[href]:focus,.badge-danger[href]:hover{color:#fff;text-decoration:none;background-color:#bd2130}.badge-light{color:#212529;background-color:#f8f9fa}.badge-light[href]:focus,.badge-light[href]:hover{color:#212529;text-decoration:none;background-color:#dae0e5}.badge-dark{color:#fff;background-color:#343a40}.badge-dark[href]:focus,.badge-dark[href]:hover{color:#fff;text-decoration:none;background-color:#1d2124}
 </style>
 
   <!-- Favicons -->
@@ -379,7 +383,7 @@
   <div class="modal-body" id="contenu-param">
   <ul>
   <?php
-  if(isset($user)){
+  if(Auth::user()){
     $params =  Auth::user()->params ;
     
     //var_dump($params);
@@ -397,7 +401,7 @@
       $label = str_replace('last_login','Dernière connexion', $tab2[0]);
       
       if($tab2[0] == 'event_bgcolor') {
-        $value = '<div style="height:10px;width:10px;background-color:'.  $tab2[1] . '">&nbsp;</div>' ;
+        $value = '<div style="height:20px;width:20px;background-color:'.  $tab2[1] . '">&nbsp;</div>' ;
         $label = str_replace('event_bgcolor','Couleur case agenda', $tab2[0]);
       }else{
         $value = $tab2[1];
@@ -406,10 +410,14 @@
       
       
       
-      
+      //format date d/m/Y
+      if($tab2[0] == 'last_login') {
+        $value = date('d/m/Y', strtotime($tab2[1]));
+      }else{
       echo '<li><b>' . $label . '</b> :' . $value . '</li>';
+      }
     }
-  }
+  }else echo 'no user' ;
   //var_dump($tab3);
   
   ?>
@@ -541,12 +549,15 @@ case "/create-event": text2show = 'Créer un RDV';break;
 case "/agenda-global": text2show = 'Agenda Global';break;
 case "/usagers": text2show = 'usagers';break;
 case "/usagers/create": text2show = 'Créer un usager';break;
-case "/usagers/{usager}/edit": text2show = 'Edition usager';break;
+case "/usagers/{{ request()->usager }}/edit": text2show = 'Edition usager';break;
 case "/interventions": text2show = 'interventions';break;
 case "/interventions/create": text2show = 'Créer une intervention';break;
+case "/interventions/{{ request()->intervention }}/edit": text2show = 'Edition Intervention';break;
 case "/filemanager": text2show = 'Documents';break;
 
-default: text2show = pathname;
+case "/": case "": text2show = ' ';break;
+
+default: text2show = '';//pathname;
 
          }         
          $('.pagetitle h1').text(text2show);

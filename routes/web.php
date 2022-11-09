@@ -15,7 +15,7 @@ use App\Http\Controllers\InterventionsController;
 
 
 
-Route::get('/', [CustomAuthController::class, 'index'])->name('login');
+Route::get('/', [CustomAuthController::class, 'index']);
 
 Route::get('documents', [CustomAuthController::class, 'documents']); 
 
@@ -30,6 +30,8 @@ Route::post('custom-registration', [CustomAuthController::class, 'customRegistra
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 Route::get('users', [CustomAuthController::class, 'users'])->name('users');
 Route::get('listes', [CustomAuthController::class, 'listes'])->name('listes');
+Route::get('users/{user}/edit', [CustomAuthController::class, 'edit'])->name('users.edit');
+Route::delete('users/{user}', [CustomAuthController::class, 'destroy'])->name('users.destroy');
 
 Route::get('agenda');
 Route::get('calendar-event', [CalenderController::class, 'index']);
@@ -67,6 +69,8 @@ Route::get('interventions/{intervention}', [InterventionsController::class, 'sho
 Route::get('interventions/{intervention}/edit', [InterventionsController::class, 'edit'])->name('interventions.edit');
 Route::post('interventions/{intervention}/update', [InterventionsController::class, 'update'])->name('interventions.update');
 Route::delete('interventions/{intervention}', [InterventionsController::class, 'destroy'])->name('interventions.destroy');
+
+
 
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {

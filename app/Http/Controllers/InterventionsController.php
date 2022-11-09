@@ -281,7 +281,7 @@ class InterventionsController extends Controller
                 $data["type_interventions"] = DB::table('types_intervention')->get();
                 $data["thematiques"] =   DB::table('thematiques')->get();
                 $data["sous_thematiques"] =  DB::table('sous_thematiques')->get();
-                $data["users"] = DB::table('users')->get();
+                $data["users"] = DB::table('users')->orderBy('name', 'asc')->get();
                 $data["resultats"] =  DB::table('resultats')->get();
                 
                 
@@ -398,7 +398,7 @@ class InterventionsController extends Controller
             $data["type_interventions"] = DB::table('types_intervention')->get();
             $data["thematiques"] =   DB::table('thematiques')->get();
             $data["sous_thematiques"] =  DB::table('sous_thematiques')->get();
-            $data["users"] = DB::table('users')->get();
+            $data["users"] = DB::table('users')->orderBy('name', 'asc')->get();
             $data["resultats"] =  DB::table('resultats')->get();
             $data["intervention"] = $intervention;
             

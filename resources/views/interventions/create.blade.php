@@ -37,12 +37,39 @@
 
 
 					<div class="form-group radio-cat">
-						<label for="interventions_categorie" >Catégorie</label><br/>
-						<select class="form-control form-control-lg"  name="interventions_categorie" id="interventions_categorie" >
+						<label  >Catégorie</label><br/>
+						<!--<select class="form-control form-control-lg"  name="interventions_categorie" id="interventions_categorie" >
 						@foreach ($interventions_categorie as $u)
 						<option value="{{ $u->id }}" >{{ $u->nom }}</option>
 						@endforeach
-						</select>
+						</select>-->
+						<div class="input-group">
+    				<div id="radioBtn" class="btn-group">
+    					
+					
+
+						@foreach ($interventions_categorie as $u)
+
+						<?php
+
+						$nom = $u->nom;
+						$nom = str_replace(' ', '', $nom);
+
+?>
+
+<div class="d-inline-block btn btn-sm ">
+   
+<input  value="{{ $u->id }}" type="radio" name="interventions_categorie" id="i_{{$u->id}}"
+	
+	><label  for="i_{{$u->id}}">{{ $u->nom }}</label> 
+    
+</div>
+@endforeach
+</div>
+    		</div>
+
+
+
 						@error("id_interventions_categorie")
 						<div>{{ $message }}</div>
 						@enderror
@@ -61,7 +88,7 @@
 						<select class="form-select"   name="user" id="user" >
 						<option value="" >Sélectionner</option>
 						@foreach ($users as $u)
-						<option value="{{ $u->id }}" >{{ $u->name }}</option>
+						<option value="{{ $u->id }}" >{{ $u->name }} ({{ $u->role}})</option>
 						@endforeach
 						</select>
 						@error("id_user")
@@ -191,12 +218,71 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-	$('#interventions_categorie').each(function(i, select){
+	
+
+	$('input[name="interventions_categorie"]').change(function(){ 
+		
+		$.each( $('input[name="interventions_categorie"]'), function( key, value ) {
+		$(this).attr('checked', false);
+	});
+		changed();
+	});
+
+function changed() {
+  id = $('input[name="interventions_categorie"]:checked').val();
+	// alert(id);
+	setTimeout(function(){
+	$("#i_"+id).attr('checked','checked');
+	},10);
+}
+	//add/remove attr checked to radios named "interventions_categorie"
+/*
+	$('input[name="interventions_categorie"]').on('change', function() {
+
+		console.log($(this).attr('id'));
+		$(this).parent('.btn').removeClass('active');
+		if( $(this).attr('id') === 'i_1' ){
+			$('#i_1').prop('checked', true);
+			$(this).parent('.btn').addClass('active');
+			$('#i_2').removeAttr('checked');
+			$('#i_3').removeAttr('checked');
+		}else if( $(this).attr('id') === 'i_2' ){
+			$('#i_2').prop('checked', true);
+			$(this).parent('.btn').addClass('active');
+			$('#i_1').removeAttr('checked');
+			$('#i_3').removeAttr('checked');
+		}else if( $(this).attr('id') === 'i_3' ){
+			$('#i_3').prop('checked', true);
+			$(this).parent('.btn').addClass('active');
+			$('#i_1').removeAttr('checked');
+			$('#i_2').removeAttr('checked');
+		}
+*/
+
+
+	
+
+		//if is checked
+		/*
+		if( $(this).is(':checked') ) {
+			//$('input[name="interventions_categorie"]').not(this).removeAttr('checked');
+			console.log($(this).attr('id'));
+			$(this).prop('checked',true).click(); 
+		}else{
+			$(this).prop('checked',false); 
+		}*/
+		
+		//$('#'.$(this).attr('id')).attr('checked');
+
+	//});
+
+
+	/*$('#interventions_categorie').each(function(i, select){
     var $select = $(select);
     $select.find('option').each(function(j, option){
         var $option = $(option);
         // Create a radio:
-        var $radio = $('<input type="radio" />');
+        var $radio = $('<input type="radio" data-toggle="toggle" data-onstyle="dark" data-offstyle="light" data-style="border" />');
         // Set name and value:
         $radio.attr('name', $select.attr('name')).attr('value', $option.val());
         // Set checked if the option was selected
@@ -205,11 +291,11 @@ $(document).ready(function(){
         $select.before($radio);
         // Insert a label:
         $select.before(
-          $("<label />").attr('for', $select.attr('name')).text($option.text())
+          $("<label class='btn-outline-info' />").attr('for', $select.attr('name')).text($option.text())
         );
     });
     $select.remove();
-});
+});*/
 
 $("#usagers").on('input', function () {
     var val = this.value;

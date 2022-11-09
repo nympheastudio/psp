@@ -15,6 +15,11 @@ class CustomAuthController extends Controller
 {
     public function index()
     {
+
+        if(Auth::check()){
+            return redirect("dashboard");
+        }
+  
         return view('auth.login');
     }  
       
@@ -38,6 +43,18 @@ class CustomAuthController extends Controller
     {
         return view('auth.registration');
     }
+
+    public function edit(User $user)
+    {
+        
+        return view('users.edit', compact('user'));
+    }
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('users')->with('success', 'Utilisateur supprimé avec succès');
+    }
+
     public function users()
     {
         $users = User::all();

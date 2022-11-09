@@ -25,7 +25,7 @@
 			<tr>
 				<td>
 					<!-- Lien pour afficher un Post : "posts.show" -->
-					<a href="{{ route('usagers.show', $u) }}" title="Lire l'article" >{{ $u->nom }}</a>
+					<a href="{{ route('usagers.edit', $u) }}" title="Lire l'article" >{{ $u->nom }}</a>
 				</td>
 				<td>{{ $u->prenom }}</td>
 				<td>{{ $u->genre }}</td>
@@ -49,7 +49,12 @@
 			@endforeach
 		</tbody>
 	</table>
-	
+	<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" href="https://psp.facevaucluse.com/usagers/create">
+        <i class="large material-icons">+</i>
+    </a>
+
+</div>
 	<script type="text/javascript">
 $(document).ready(function(){
 

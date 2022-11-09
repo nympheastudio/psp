@@ -71,10 +71,17 @@
       <label for="intervention">lier à une intervention existante :</label>
 
 
-      <input id="intervention" name="intervention" type="text" list="intervention_datalist" class="form-select" placeholder="Lier à une intervention existante">
+      <input id="intervention" name="intervention" type="text" list="intervention_datalist" class="form-select"  placeholder="Lier à une intervention existante"
+      >
       <datalist id="intervention_datalist">
+       
           @foreach($interventions as $intervention)
-          <option rel="{{$intervention->id}}" value="{{$intervention->usager}} {{$intervention->categorie}} {{$intervention->user}}" >
+          <option 
+          @if( Request::input('intervention_id')  == $intervention->id )
+       selected
+        @endif
+
+          rel="{{$intervention->id}}" value="{{$intervention->usager}} {{$intervention->categorie}} {{$intervention->user}}" >
           @endforeach
       </datalist>
 
@@ -102,6 +109,14 @@
 
   
   $(document).ready(function(){
+
+    const intervention_id = {{Request::input('intervention_id')}};
+    console.log(intervention_id);
+
+    if(intervention_id){
+      $('#intervention_id').val(intervention_id);
+    }
+
     $("#intervention").on('input', function () {
     var val = this.value;
     if($('#intervention_datalist option').filter(function(){

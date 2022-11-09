@@ -68,7 +68,7 @@ id_sous_thematique
 @foreach ($users as $u)
 <option value="{{ $u->id }}"
 @if ($intervention->id_user == $u->id) selected="selected" @endif
->{{ $u->name }}</option>
+>{{ $u->name }} ({{ $u->role}})</option>
 @endforeach
 </select>
 @error("id_user")
@@ -224,21 +224,31 @@ if ($intervention->resultat != '') {
 </div>
 <div role="tabpanel" class="tab-pane" id="rdvs" >
 <p>
-<label for="rdvs" >RDVs</label><br/>
 <div id="rdvs">
-<ul>
+<ol>
 	@foreach ($rdvs as $r)
 
-<li><p>{{$r->event_name}}</p>
-<p>{{$r->event_start }}</p>
-<p>{{$r->event_end}}</p>
+	<?php
+//<span class="label label-success"
+
+$event = explode('Poste :', $r->event_name);
+$event_name = $event[0];
+$poste = $event[1];
+
+	?>
+
+<li><p><b>{{$event_name}}</b> <span class="badge rounded-pill bg-primary p-2 ms-2">Poste {{$poste}}</span></p>
+<p>Du {{\Carbon\Carbon::parse($r->event_start)->format('d/m/Y  à h:m')}}</p>
+<p>Jusqu 'au {{\Carbon\Carbon::parse($r->event_end)->format('d/m/Y à h:m')}}</p>
+
 
 </li>
 
 	@endforeach
-</ul>
+</ol>
 
-
+<p>
+	<a href="https://psp.facevaucluse.com/create-event?intervention_id={{$intervention->id}}" class="btn btn-secondary btn-sm">Ajouter un rendez-vous à cette intervention</a>
 </div>
 </p>
 

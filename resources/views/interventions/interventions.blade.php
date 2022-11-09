@@ -29,11 +29,29 @@
 				{{ $u->type_intervention }}	
 			</td>
 			<td>
-				{{ $u->resultat }}	
+			@if( $u->resultat == 'en cours')
+				<span class="badge badge-warning">{{ $u->resultat }}</span>
+				@elseif( $u->resultat == 'réglé')
+				<span class="badge badge-success">{{ $u->resultat }}</span>
+				@elseif( $u->resultat == 'Annulée')
+				<span class="badge badge-danger">{{ $u->resultat }}</span>
+				@else
+				<span class="badge badge-info">{{ $u->resultat }}</span>
+				@endif
+			
+				<!--
+					<span class="badge badge-primary">Primary</span>
+<span class="badge badge-secondary">Secondary</span>
+<span class="badge badge-success">Success</span>
+<span class="badge badge-danger">Danger</span>
+<span class="badge badge-warning">Warning</span>
+<span class="badge badge-info">Info</span>
+<span class="badge badge-light">Light</span>
+<span class="badge badge-dark">Dark</span>-->
 			</td>
 			<td>
 				
-				{{ $u->categorie }}
+			{{ $u->categorie }}
 </td>
 <td>
 				{{$u->thematique}}
@@ -43,7 +61,7 @@
 			</td>
 			
 				<td>
-					<a href="{{ route('interventions.show', $u) }}" title="Lire l'article" >{{ $u->genre }} {{ $u->nom_beneficiaire }} {{ $u->age }}</a>
+					<a href="{{ route('interventions.edit', $u) }}" title="Lire l'article" >{{ $u->genre }} {{ $u->nom_beneficiaire }} {{ $u->age }}</a>
 				</td>
 				<td>
 {{ $u->quartier }}
@@ -72,28 +90,7 @@
     <a class="btn-floating btn-large red" href="https://psp.facevaucluse.com/interventions/create">
         <i class="large material-icons">+</i>
     </a>
-    <!-- <ul>
-        <li>
-            <a id="first-fab" class="btn-floating" data-fabcolor="#45d1ff" href="https://psp.facevaucluse.com/create-event">
-                <i class="material-icons">Créer un RDV</i>
-            </a>
-        </li>
-       <li>
-            <a id="second-fab" class="btn-floating" data-fabcolor="#7345ff">
-                <i class="material-icons">format_quote</i>
-            </a>
-        </li>
-        <li>
-            <a id="third-fab" class="btn-floating" data-fabcolor="#0084ff">
-                <i class="material-icons">publish</i>
-            </a>
-        </li>
-        <li>
-            <a id="fourth-fab" class="btn-floating" data-fabcolor="#ff7345">
-                <i class="material-icons">attach_file</i>
-            </a>
-        </li>
-    </ul>-->
+
 </div>
 	<script type="text/javascript">
 $(document).ready(function(){
