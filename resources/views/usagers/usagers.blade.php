@@ -33,9 +33,8 @@
 				<td>{{ $u->quartier }}</td>
 				<td>
 					<!-- Lien pour modifier un Post : "posts.edit" -->
-					<a href="{{ route('usagers.edit', $u) }}" title="Modifier l'article" class="btn btn-secondary">Modifier</a>
-				</td>
-				<td>
+					<p><a href="{{ route('usagers.edit', $u) }}" title="Modifier l'article" class="btn btn-secondary">Modifier</a>
+</p>
 					<!-- Formulaire pour supprimer un Post : "posts.destroy" -->
 					<form method="POST" action="{{ route('usagers.destroy', $u) }}" >
 						<!-- CSRF token -->

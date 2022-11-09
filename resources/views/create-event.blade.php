@@ -81,7 +81,7 @@
        selected
         @endif
 
-          rel="{{$intervention->id}}" value="{{$intervention->usager}} {{$intervention->categorie}} {{$intervention->user}}" >
+          rel="{{$intervention->id}}" value="{{$intervention->usager}}  ({{$intervention->categorie}})" >
           @endforeach
       </datalist>
 

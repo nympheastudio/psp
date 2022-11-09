@@ -253,6 +253,7 @@ class InterventionsController extends Controller
             //$interventions = Interventions::latest()->get();
             $data["total_interventions"] = DB::table('interventions')->count();
             $data["total_usagers"] = DB::table('usagers')->count();
+            $data["usagers"] = DB::table('usagers')->get();
             $data["total_interventions_en_cours"] = DB::table('interventions')->where('resultat', 'En cours')->count();
             $data["total_interventions_cloturees"] = DB::table('interventions')->where('resultat', 'Réglé')->count();
             

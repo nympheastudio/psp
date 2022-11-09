@@ -9,10 +9,12 @@
   <thead>
     <tr>
       
-      <th scope="col" >Nom</th>
-	  <th scope="col" >Role</th>
-      <th scope="col" >Actions</th>
-	  <th scope="col"></th>
+      <th scope="col" width="10%" >Nom</th>
+	  <th scope="col"width="10%" >Prénom</th>
+	  <th scope="col" width="10%" >Email</th>
+	  <th scope="col"  width="10%">Role</th>
+      <th scope="col" width="10%">Actions</th>
+	
     </tr>
   </thead>
 
@@ -20,19 +22,16 @@
 			<!-- On parcourt la collection de Post -->
 			@foreach ($users as $u)
 			<tr>
-				<td>
-					<!-- Lien pour afficher un Post : "posts.show" {{ route('usagers.show', $u) }} -->
-					<p>{{ $u->name }} {{ $u->prenom }}</p>
-				</td>
-				<td>
-					<!-- Lien pour afficher un Post : "posts.show" {{ route('usagers.show', $u) }} -->
-					<p>{{ $u->role }}</p>
-				</td>
+				<td>{{ $u->name }}</td>
+				<td>{{ $u->prenom }}</td>
+				<td>{{ $u->email }}</td>
+				
+
+				<td><span class="badge @if($u->role == 'admin')badge-primary @else badge-warning @endif">{{ $u->role }}</span></td>
 				<td>
 					<!-- Lien pour modifier un Post : "posts.edit" -->
-					<a href="{{ route('users.edit', $u) }}" title="Modifier l'utilisateur" class="btn btn-secondary">Modifier</a>
-				</td>
-				<td>
+					<p><a href="{{ route('users.edit', $u) }}" title="Modifier l'utilisateur" class="btn btn-secondary">Modifier</a></p>
+				
 					<!-- Formulaire pour supprimer un Post : "posts.destroy" -->
 					<form method="POST" action="{{ route('users.destroy', $u) }}" >
 						<!-- CSRF token -->

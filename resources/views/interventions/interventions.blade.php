@@ -12,9 +12,9 @@
 	  <th scope="col" style=" width:5%">Thème</th>
       
 	  <th scope="col"style=" width:7%">Sous thème</th>
-	  <th scope="col"style=" width:10%">Usager</th>
+	  <th scope="col"style=" width:7%">Usager</th>
 	  <th scope="col"style=" width:10%">Quartier</th>
-	  <th scope="col"style=" width:10%">Cat socioPro</th>
+	  <th scope="col"style=" width:13%">Cat Socio - Pro</th>
       <th scope="col" style=" width:7%">Actions</th>
     </tr>
   </thead>
